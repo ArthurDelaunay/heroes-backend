@@ -15,11 +15,11 @@ app.get("/", (req, res) => {
 
 // request to post a new heroe
 app.post("/", verifyHeroExist, validateHero, (req, res) => {
-  const { slug, name, color, isAlive, age, image } = req.body
+  const { slug, name, color, power, isAlive, age, image } = req.body
   const newSuperHero = {
     slug: slug,
     name: name,
-    power: [],
+    power: power,
     color: color,
     isAlive: isAlive,
     age: age,
@@ -61,12 +61,12 @@ app.delete("/:slug", verifySlugExist, (req, res) => {
 
 // request to delete a power of one hero by dynamic url
 app.delete(
-  "/:slug/power/:power",
+  "/:slug/powers/:power",
   verifySlugExist,
   verifyPowerExist,
   (req, res) => {
     superHeroes[req.heroId].power.splice(req.powerId, 1)
-    res.json(`${req.power} has been delete`)
+    res.json(`the power ${req.power} of ${req.hero.name} has been deleted`)
   }
 )
 

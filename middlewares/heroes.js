@@ -32,6 +32,7 @@ const verifyPowerExist = (req, res, next) => {
   const alreadyExistPowerId = req.hero.power.findIndex((power) => {
     return power === req.params.power
   })
+
   if (alreadyExistPowerId > -1) {
     req.power = req.hero.power[alreadyExistPowerId]
     req.powerId = alreadyExistPowerId
@@ -45,8 +46,6 @@ const validateHero = (req, res, next) => {
   const keysSort = Object.keys(req.body).sort()
   const keysSortRef = Object.keys(superHeroes[0]).sort()
   const isEqual = JSON.stringify(keysSort) === JSON.stringify(keysSortRef)
-  console.log(keysSort, keysSortRef)
-  console.log(isEqual)
   if (isEqual) {
     next()
   } else {
